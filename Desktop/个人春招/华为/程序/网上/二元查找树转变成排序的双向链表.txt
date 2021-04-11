@@ -1,0 +1,58 @@
+kua的解法：
+树的结构一般是用递归算法，这道题也是
+先给出树结点结构(c++)
+class Node 
+{
+public:
+ Node* left;
+ Node* right;
+ int value;
+}
+方法1：前序遍历
+数的left,right指针转化为双向链表指针，left相当于pervious，right相当于next
+
+从current节点开始
+1 转化current->left，返回转化好的双向链表的最右一个元素,假设为leftResult
+2 转化current->right，返回转化好的双向链表的最左一个元素，假设为rightResult
+3 current->left=leftResult
+leftResult->right=current
+current->right=rightResult
+rightResult->left=current
+因而递归函数需要判断当前节点为原来的左节点还是右节点，返回的节点不同
+
+代码：
+
+class Node
+{
+public:
+ Node* left;
+ Node* right;
+ int value;
+ Node* ConvertTree(Node* current, bool asLeft)
+ {
+  Node* leftResult, rightResult;
+  if(!current)
+   return null;
+  if(current->left)
+   leftResult = ConvertTree(current->left, true);
+  if(current->right)
+   resultResult = ConvertTree(current->right, false);
+  current->left = leftResult;
+  leftResult->right = current;
+  current->right = rightResult;
+  rightResult->left = current;
+  Node* temp = current;
+  if(asLeft)
+  {
+   while(temp->right)
+    temp = temp->right;
+  }
+  else
+  {
+   while(temp->left)
+    temp = temp->left;
+  }
+  return temp;
+
+ }
+};

@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+//const int ListLength=10;
+const int ListLength=3;     //字符串数组的长度
+void Swap(char &c, char &s) //交换字符c和s
+{
+     char temp=c;
+     c=s;
+     s=temp;
+}
+void Perm(char *List, int m, int k)
+{
+     static int count=0;
+     if(m==k)
+     {
+             cout<<++count<<":";
+             for(int i=0; i<=ListLength-1; i++)
+             {
+                     cout<<List[i];
+             }            
+             cout<<endl;
+     }
+     else
+     {
+         for(int i=m; i<=k; i++)
+         {
+                  Swap(List[m],List[i]);
+                  Perm(List, m+1, k);
+                  Swap(List[m],List[i]);
+                 
+         }        
+     }
+        
+}
+int main()
+{
+    //char List[ListLength]={'a','b','c','d','e','f','g','h','i','j'};
+    char List[ListLength]={'a','b','c'};
+    Perm(List, 0, ListLength-1);
+    system("pause");
+    return 0; 
+
+}

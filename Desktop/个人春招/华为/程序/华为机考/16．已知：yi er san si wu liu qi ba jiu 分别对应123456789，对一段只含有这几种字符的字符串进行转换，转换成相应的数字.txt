@@ -1,0 +1,57 @@
+
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+char* sss[9] = {"yi", "er", "san", "si", "wu", "liu", "qi", "ba", "jiu"};
+
+int fun(char* str)
+{
+	int i;
+	int sum = 0;
+	int d = 0;
+	i = 0;
+	int j;
+	
+	while(str[i] != '\0')
+	{
+		if(str[i] == 'y' || str[i] == 'e'|| str[i] == 'w' || str[i] == 'q' || str[i] == 'b')
+			d = 2;
+		else if(str[i] == 'l' || str[i] == 'j')
+			d = 3;
+			else if(str[i] == 's')
+				{
+					if(str[i+1] == 'a')
+						d = 3;
+					else d = 2;
+				}
+
+			for(int k = 0; k < 9; k++)
+				if(strncmp(str+i,sss[k],d) == 0)
+					j = k+1;
+			sum = 10*sum + j;
+			i = i+d;
+						
+
+	}
+	return sum;
+}
+
+int main()
+{
+	char strstr[1000];
+	memset(strstr,0,sizeof(strstr));
+	char *s = strstr;
+	cin >> s;
+	
+	int outsum;
+	outsum = fun(s);
+	
+	cout << outsum << endl;
+	
+	system("pause");
+	return 0;
+}
+			

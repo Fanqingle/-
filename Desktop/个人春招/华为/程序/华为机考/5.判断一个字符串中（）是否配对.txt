@@ -1,0 +1,41 @@
+
+#include<iostream>
+using namespace std;
+bool match(char a[],int length);
+int main()
+ { 
+   char b[100];
+   int len;
+   bool m;
+   cout<<"enter:"<<endl;
+   gets(b);
+   len=strlen(b);
+   m=match(b,len);
+   if(m) cout<<"match"<<endl;
+   else cout<<"nonmatch"<<endl;
+   return 0;
+ }
+
+bool match(char a[],int length)
+ { 
+	char *p=a;
+    int count1=0;
+    int count2=0;
+   
+ while(*p!='\0')
+   { 
+	   if(*p=='(') count1++;
+       if(*p==')') count2++;
+	   if(count2>count1)
+	  
+		   return false;
+		  
+	   
+	   p++;
+   }
+    if(count1==count2) 
+		return true;
+    else 
+		return false;
+}
+ 

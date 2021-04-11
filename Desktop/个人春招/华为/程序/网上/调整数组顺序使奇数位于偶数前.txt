@@ -1,0 +1,70 @@
+void Reorder(int *pData, unsigned int length, bool (*func)(int));
+bool isEven(int n);
+
+
+// Devide an array of integers into two parts, odd in the first part,
+// and even in the second part
+// Input: pData  - an array of integers
+//        length - the length of array
+
+void ReorderOddEven(int *pData, unsigned int length)
+{
+      if(pData == NULL || length == 0)
+            return;
+
+      Reorder(pData, length, isEven);
+}
+
+
+// Devide an array of integers into two parts, the intergers which 
+// satisfy func in the first part, otherwise in the second part
+// Input: pData  - an array of integers
+//        length - the length of array
+//        func   - a function
+
+void Reorder(int *pData, unsigned int length, bool (*func)(int))
+{
+      if(pData == NULL || length == 0)
+            return;
+
+      int *pBegin = pData;
+      int *pEnd = pData + length - 1;
+
+      while(pBegin < pEnd)
+      {
+            // if *pBegin does not satisfy func, move forward
+            if(!func(*pBegin))
+            {
+                  pBegin ++;
+                  continue;
+            }
+
+            // if *pEnd does not satisfy func, move backward
+            if(func(*pEnd))
+            {
+                  pEnd --;
+                  continue;
+            }
+
+            // if *pBegin satisfy func while *pEnd does not,
+            // swap these integers
+            int temp = *pBegin;
+            *pBegin = *pEnd;
+            *pEnd = temp;
+      }
+}
+
+
+// Determine whether an integer is even or not
+// Input: an integer
+// otherwise return false
+
+bool isEven(int n)
+{
+      return (n & 1) == 0;
+}
+讨论：
+上面的代码有三点值得提出来和大家讨论：
+１．函数isEven判断一个数字是不是偶数并没有用%运算符而是用&。理由是通常情况下位运算符比%要快一些；
+２．这道题有很多变种。这里要求是把奇数放在偶数的前面，如果把要求改成：把负数放在非负数的前面等，思路都是都一样的。
+３．在函数Reorder中，用函数指针func指向的函数来判断一个数字是不是符合给定的条件，而不是用在代码直接判断（hard code）。这样的好处是把调整顺序的算法和调整的标准分开了（即解耦，decouple）。当调整的标准改变时，Reorder的代码不需要修改，只需要提供一个新的确定调整标准的函数即可，提高了代码的可维护性。例如要求把负数放在非负数的前面，我们不需要修改Reorder的代码，只需添加一个函数来判断整数是不是非负数。这样的思路在很多库中都有广泛的应用，比如在ＳＴＬ的很多算法函数中都有一个仿函数（functor）的参数（当然仿函数不是函数指针，但其思想是一样的）。如果在面试中能够想到这一层，无疑能给面试官留下很好的印象。

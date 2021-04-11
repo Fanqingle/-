@@ -1,0 +1,18 @@
+Node *Reverse(Node *head)
+{
+	Node *p1,*p2,*p3;
+	if(head==NULL||head->NULL)
+		return head;
+	p1=head;
+	p2=p1->next;
+	while(p2)
+	{
+		p3=p2->next;
+		p2->next=p1;
+		p1=p2;
+		p2=p3;
+	}
+	head->next=NULL;
+	head=p1;
+	return head;
+}

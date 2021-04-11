@@ -1,0 +1,20 @@
+实现singleton类有两种方法：
+ 1. 使用私有类数据成员//头文件
+class A 
+{private:A();
+static A *instance;
+public:A * get_instance();};//实现文件A *A::instance = NULL;A *A::get_instance()
+{if (NULL == instance) 
+{instance = new A();}
+return instance;}?
+2. 使用局部静态变量//头文件
+class B 
+{public:B *get_instance();private:B();
+~B();};//实现文件
+B * B::get_instance()
+{static B *instance = NULL;
+if (NULL == instance) 
+{instance = new B();}
+return instance;}?
+
+  Singleton是java设计模式中的一种常用设计模式，翻译过来是单例或者单态模式。Singleton模式主要作用是保证在Java应用程序中，一个类Class只有一个实例存在。Singleton模式就为我们提供了这样实现的可能。使用Singleton的好处还在于可以节省内存，因为它限制了实例的个数，有利于Java垃圾回收。在我们的Java应用程序中，随着应用程序的运行会创建出很多对象。但有时候我们希望在创建某类对象时，无论创建多少次该类对象只有一份在内存中。这就是单例模式。?

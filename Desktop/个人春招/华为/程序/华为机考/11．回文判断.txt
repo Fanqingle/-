@@ -1,0 +1,26 @@
+
+#include<iostream>
+using namespace std;
+
+bool func(int m);
+void main()
+{
+	int m;
+	cout<<"enter a number:"<<endl;
+	cin>>m;
+	cout<<func(m)<<endl;
+}
+bool func(int m)
+{ 
+	int i,n=0;
+	i=m;
+	
+   while(i)
+   {
+	   n=n*10+i%10;
+	   i/=10;
+  }
+   if(m==n) 
+	   return true;
+   return false;
+}

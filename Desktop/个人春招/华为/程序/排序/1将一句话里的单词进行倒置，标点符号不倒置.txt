@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+
+void strReverse(char *str,int n)
+{
+ int i = 0;
+ int j = 0;
+ int begin;
+ int end;
+char temp;
+
+
+//...............第一步：整体倒置......................//
+
+j = n-1;
+ while (j>i)
+ {
+  temp = str[i];
+  str[i] = str[j];
+  str[j] = temp;
+  i++;
+  j--;
+ }
+ printf("after reversing wholly string = %s\n",str);
+
+//...............第二步:按单词部分倒置......................//
+ i = 0;
+ while (str[i]!='\0')
+ {
+  if (str[i]!=' ')
+  {
+   begin = i;
+   while ((str[i]!='\0') && (str[i]!=' '))
+   {
+    i++;
+   }
+   i = i-1;
+   end = i;
+  } 
+  while (begin<end)
+  {
+   temp = str[begin];
+   str[begin] = str[end];
+   str[end] = temp;
+   begin++;
+   end--;
+  }
+  i++;
+ }
+}
+int main()
+{
+ 
+ char str[] = "i come from nanjing.";
+ int j = 0;
+
+
+ j = strlen(str);
+ printf(" string = %s\n",str);
+ strReverse(str,j);
+ printf(" string = %s\n",str);
+ return 0;
+}
+

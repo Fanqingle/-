@@ -1,0 +1,41 @@
+char*     reverse(char*   pSource) 
+{ 
+int iLen   =   0; 
+char iTemp; 
+char*   pTemp   =   pSource; 
+int end   =   0; 
+int len   =   0; 
+
+while   (*pTemp++   !=   '\0 ') 
+iLen   ++; 
+
+char*   p   =   (char*)malloc(iLen   +   1);   //如果输入参数允许修改，可以直接修改原字符串 
+
+for   (int   i=0;i <(iLen+1)   /   2;i++) 
+{ 
+p[i]   =   pSource[iLen   -   1   -   i]; 
+p[iLen   -   1   -   i]   =   pSource[i]; 
+} 
+
+for   (i=0;i <iLen;i++) 
+{ 
+if   (p[i]   ==   '   '   &&   len)   
+{ 
+int   begin   =   end   +   1   -len; 
+for(int   j=0;j <len/2;j++) 
+{ 
+iTemp   =   p[j   +   begin]; 
+p[j   +   begin]   =   p[end   -   j]; 
+p[end   -   j]   =   iTemp; 
+} 
+len   =   0; 
+} 
+else 
+{ 
+end   =   i; 
+len   ++; 
+} 
+} 
+p[iLen]   =   '\0 '; 
+return   p; 
+} 

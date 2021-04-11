@@ -1,0 +1,58 @@
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+int fun(char* str, int n)
+{
+	char *temp = new char[n+2];
+	char *str2 = str;
+	int sum = 0;
+	int outsum = 0;
+	char* t;
+	
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 2; j <= n-i; j++)
+		{
+			sum = 0;
+			str2 = str;
+			memset(temp,0,(n+2)*sizeof(char));
+			strncpy(temp, str+i, j);
+	
+			while((t = strstr(str2,temp)) != NULL)
+			{
+				sum++;
+				str2 = t+j;
+			}
+			if( sum > outsum)
+			{
+				 outsum = sum;
+			}
+		}	
+	}
+	if(outsum == 1)
+		return 0;
+	
+	return outsum;
+	
+}
+
+int main()
+{
+	char strstr[1000];
+	memset(strstr,0,sizeof(strstr));
+	char *s = strstr;
+	cin >> s;
+	int n =strlen(s);
+	int outsum;
+	outsum = fun(s,n);
+	cout << outsum << endl;
+	
+	system("pause");
+	return 0;
+}
+	
+			

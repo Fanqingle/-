@@ -1,0 +1,23 @@
+void ShellPass(SeqList R，int d)
+   {//希尔排序中的一趟排序，d为当前增量
+     for(i=d+1;i<=n；i++) //将R[d+1．．n]分别插入各组当前的有序区
+       if(R[i].key<R[i-d].key){
+         R[0]=R[i];j=i-d； //R[0]只是暂存单元，不是哨兵
+         do {//查找R[i]的插入位置
+            R[j+d]；=R[j]； //后移记录
+            j=j-d； //查找前一记录
+         }while(j>0&&R[0].key<R[j].key)；
+         R[j+d]=R[0]； //插入R[i]到正确的位置上
+       } //endif
+   } //ShellPass
+
+  void  ShellSort(SeqList R)
+   {
+    int increment=n； //增量初值，不妨设n>0
+    do {
+          increment=increment/3+1； //求下一增量
+          ShellPass(R，increment)； //一趟增量为increment的Shell插入排序
+       }while(increment>1)
+    } //ShellSort
+  注意：
+　    当增量d=1时，ShellPass和InsertSort基本一致，只是由于没有哨兵而在内循环中增加了一个循环判定条件"j>0"，以防下标越界。

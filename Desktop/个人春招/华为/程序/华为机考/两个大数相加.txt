@@ -1,0 +1,67 @@
+//超大整数加法运算
+//#include "stdafx.h"
+#include <string>
+#include<iostream>
+using namespace std;
+#define ln 100  //数字长度
+
+int main(int argc, char* argv[])
+{    
+    int la = 0, lb = 0;
+    int A[ln];
+    int B[ln];
+    for(int l=0; l<ln; l++)
+    {
+        A[l]=0;
+        B[l]=0;
+    }
+
+    char a[ln];
+    cout << "输入一个高精度数(小于100位）作被加数:" << endl;
+    cin.getline(a, ln);
+    la =strlen(a);
+    for (int i=0; i<la; i++) 
+    {
+        A[i] = int(a[la-1-i])-48;        
+    }    
+
+    char b[ln];
+    cout << "输入另一个高精度数(小于100位）作加数:" << endl;
+    cin.getline(b, ln);
+    lb =strlen(b);
+    for (i=0; i<lb; i++) 
+    {
+        B[i] = int(b[lb-1-i])-48;        
+    }
+
+    int lc;
+    if (la>lb)
+    {
+        lc = la;
+    }
+    else
+        lc = lb;
+
+    for (int j=0; j<lc; j++)
+    {
+        A[j] = A[j]+B[j];
+        A[j+1] = A[j+1]+A[j]/10;
+        A[j] = A[j]%10;
+        
+    }
+    while (A[lc-1]>10)
+    {
+        A[lc]=A[lc-1]/10;
+        lc += 1;
+
+    }
+    cout << "相加结果：" << endl;
+    for (j=lc-1; j>=0; j--)
+    {
+        cout << A[j];
+    }
+    cout << endl;
+    
+    
+    return 0;
+}

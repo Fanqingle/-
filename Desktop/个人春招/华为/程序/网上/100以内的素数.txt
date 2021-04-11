@@ -1,0 +1,16 @@
+﻿  编程100以内的素数  
+#include<iostream>
+using namespace std;
+#include<math.h>
+const int MAX=100;int main(){ 
+int prime[MAX+100]={0}; 
+int i,j,k=sqrt(MAX); 
+for(i=2; i<=k; i++) 
+{  if(prime[i]==0) 
+ {   j=i*2;  
+ do   {    prime[j]=1;    j+=i;    } 
+  while(j<=MAX);  } } 
+for(i=2; i<=MAX; i++) 
+{  if(prime[i]==0)   cout<<i<<" "; } 
+cout<<endl; return 0;}﻿
+ 

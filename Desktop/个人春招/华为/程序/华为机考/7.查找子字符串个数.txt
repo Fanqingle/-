@@ -1,0 +1,54 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int fun(char *str, char *substr);
+
+int main()
+{
+	char str[100];
+	char substr[10];
+	cout<<"ÊäÈë×Ö·û´®£º\n";
+	gets(str);
+	cout<<"ÊäÈë×Ö´®£º\n";
+	gets(substr);
+	cout<<fun(str, substr)<<endl;
+	
+	return 0;
+}
+
+int fun(char *str, char *substr)
+{
+	int count = 0;
+	
+	while (*str)
+	{
+		char *p = str;
+		char *q = substr;
+		
+		while (*q)
+		{
+			if (*p == *q)
+			{
+				p++;
+				q++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		
+		if (*q == 0)
+		{
+			str = str + strlen(substr);
+			count++;
+		}
+		else
+		{
+			str++;
+		}
+	}
+	return count;
+}

@@ -1,0 +1,47 @@
+template <class BidirectionalIterator>
+bool next_permutation(BidirectionalIterator first, BidirectionalIterator last)
+{
+if (first == last) return false;   // 空範圍
+BidirectionalIterator i = first;
+++i;
+if (i == last) return false;       // 只有一個元素
+i = last;                          // i 指向尾端
+--i;
+
+for(;;)
+{
+BidirectionalIterator ii = i;
+--i;
+// 以上，鎖定一組（兩個）相鄰元素
+if (*i < *ii)                     // 如果前一個元素小於後一個元素
+{ 
+   BidirectionalIterator j = last; // 令 j指向尾端
+   while (!(*i < *--j));            // 由尾端往前找，直到遇上比 *i 大的元素
+   iter_swap(i, j);                 // 交換 i, j
+   reverse(ii, last);               // 將 ii 之後的元素全部逆向重排
+   return true;
+}
+if (i == first)                   // 進行至最前面了
+{ 
+   reverse(first, last);            // 全部逆向重排
+   return false;
+}
+}
+}
+
+下面程序演示了利用next_permutation来求取某个序列全排列的方法：
+int main()
+{
+int ia[] = {1,2,3,4};
+vector<int> iv(ia,ia+sizeof(ia)/sizeof(int));
+
+copy(iv.begin(),iv.end(),ostream_iterator<int>(cout," "));
+cout << endl;
+while(next_permutation(iv.begin(),iv.end()))
+{
+copy(iv.begin(),iv.end(),ostream_iterator<int>(cout," "));
+cout << endl;
+}
+
+return 0;
+}

@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+char* fun(char* str, int n)
+{
+    int i=0;
+	int j=0;
+	int hash[256] = {0};
+	char *result = new char[n+1];
+	memset(result,0,(n+1)*sizeof(char));
+	for( i = 0; i < n; i++)
+	{
+		hash[str[i]]++;
+	}
+	int min = 0x7fffffff;
+
+	for( i = 0; i < 256; i++)
+	{
+		if(hash[i] < min && hash[i] != 0)
+			min = hash[i];
+	}
+	
+	for(i = 0,j = 0; i < n; i++)
+	{
+		if(hash[str[i]] != min)
+		{
+			result[j++] = str[i];
+		}
+	}
+	
+	return result;
+}
+
+int main()
+{
+	char strstr[1000];
+	memset(strstr,0,sizeof(strstr));
+	char *s = strstr;
+	cin >> s;
+
+	char *re = NULL;
+	
+	re = fun(s,strlen(s));
+	
+	cout << re << endl;
+	system("pause");
+	return 0;
+}	

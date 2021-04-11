@@ -1,0 +1,34 @@
+
+
+template< class T, class I >
+void solution_4( T BigArr[], T ResArr[] )
+{
+  //取最前面的一万个
+  memcpy( ResArr, BigArr, sizeof(T) * RES_ARR_SIZE );
+  //排序
+  std::sort( ResArr, ResArr + RES_ARR_SIZE, std::greater_equal() );
+  //最小元素索引
+  unsigned int MinElemIdx = RES_ARR_SIZE - 1;
+  //可能产生交换的区域的最小索引
+  unsigned int ZoneBeginIdx = MinElemIdx;
+  //遍历后续的元素
+  for( unsigned int i = RES_ARR_SIZE; i < BIG_ARR_SIZE; ++i )
+  {
+  //这个后续元素比ResArr中最小的元素大，则替换。
+  if( BigArr[i] > ResArr[MinElemIdx] )
+  {
+  ResArr[MinElemIdx] = BigArr[i];
+  if( MinElemIdx == ZoneBeginIdx )
+  --ZoneBeginIdx;
+  //查找最小元素
+  unsigned int idx = ZoneBeginIdx;
+  unsigned int j = idx + 1;
+  for( ; j < RES_ARR_SIZE; ++j )
+  {
+  if( ResArr[idx] > ResArr[j] )
+  idx = j;
+  }
+  MinElemIdx = idx;
+  }
+  }
+}

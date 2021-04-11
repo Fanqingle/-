@@ -1,0 +1,42 @@
+#include<stdio.h> 
+#include<string.h> 
+#include<iostream>
+using namespace std;
+void func(const char *str1,const char*str2); 
+void main()
+{
+	char *str1,*str2;
+	str1=new char[256];
+	str2=new char[256];
+	memset(str1,0,256*sizeof(char));
+	memset(str2,0,256*sizeof(char));
+	cout<<"enter:"<<endl;
+	gets(str1);
+	gets(str2);
+    func(str1,str2);
+
+}
+void func(const char *str1,const char*str2) 
+{ 
+	int m,n;
+	int k=0;
+	int l,j;
+	int i=0;
+	m=strlen(str1);
+	n=strlen(str2);
+    while(*str1!='\0')
+		{
+			if(*str1==*str2)//||(abs(*str1-*str2)=='a'-'A'))
+			{str1++;
+			 str2++;
+             k++;
+			}
+			else break;
+			
+		}
+	if(k==m&&n==m)
+		cout<<"1"<<endl;
+	else
+		cout<<k<<endl;
+
+}

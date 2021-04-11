@@ -1,0 +1,32 @@
+
+#include <iostream>
+using namespace std;
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+void func(char *p);
+void main()
+{
+	char str1[20];
+	printf("enter:");
+	gets(str1);
+	func(str1);
+	puts(str1);
+   
+}
+void func(char *p)
+{
+	char ch;
+	while(*p)
+	{   ch=*p;
+		if(isalpha(*p)&&(*p!='z')&&(*p!='Z'))
+			*p=ch+1;
+		else if(*p='z')
+			*p='a';
+		else if(*p='Z')
+			*p='A';
+		p++;
+
+	}
+}

@@ -1,0 +1,43 @@
+#include<stdio.h> 
+#include<string.h> 
+#include<iostream>
+using namespace std;
+void func(char *ptr); 
+void main()
+{
+char *ptr; 
+ptr =new char[256]; 
+memset(ptr, 0, sizeof(ptr));  
+cout<<"please input an English sentence:"<<endl; 
+gets(ptr); 
+func(ptr);
+cout<<ptr<<endl;
+
+}
+void func(char *ptr) 
+{ 
+char *ptr1; 
+ptr1=new char[256];
+memset(ptr1, 0, sizeof(ptr1)); 
+ptr1 = ptr;
+if(*ptr1<'a')
+*ptr1=*ptr1; 
+else
+*ptr1 -= 32; 
+while(*ptr1!='\0') 
+{ 
+	
+if(*ptr1==' ')
+{
+	if(*(ptr1+1)<'a')
+   *(ptr1+1)=*(ptr1+1); 
+   else
+   *(ptr1+1) -= 32; 
+} 
+ptr1++; 
+} 
+} 
+
+
+
+

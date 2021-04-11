@@ -1,0 +1,16 @@
+#include <stdio.h> 
+void select(char* str, int len, char* result, int start, int curr, int dest) 
+{ if (curr == dest) 
+puts(result); 
+else { int i; for (i = start; curr + len - i >= dest; ++i) 
+{ result[curr] = str[i]; 
+select(str, len, result, i+1, curr+1, dest); } }} } 
+int main()
+ { char *source = "ABCDE"; 
+char result[8] = {0};  
+select(str, len, result, i+1, curr+1, dest); } } } 
+int main() 
+{ char *source = "ABCDE";
+ char result[8] = {0}; 
+select(source, 5, result, 0, 0, 3);
+ return 0;}

@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+#include<string>
+using namespace std;
+
+
+pair<int ,string> fun(const string &str)
+
+{
+
+vector<string> substrs;
+
+int maxcount=1,count=1;
+
+string substr;
+
+int i,len=str.length();
+
+for(i=0;i<len;i++)
+{
+
+ substrs.push_back(str.substr(i,len-i));   //把str字符串中的子串按每次把头部减少一个的方式插入到vector向量中
+ cout<<substrs[i]<<endl;//输出vector中的值 如上图
+}
+
+for(i=0;i<len;i++) //先从第一个子串开始直到所有的遍历完所有的子串
+
+{
+
+for(int j=i+1;j<len;j++) //从下一个子串开始 寻找连续出现的子串
+
+{
+
+      count=1;
+
+      if(substrs[i].substr(0, j-i)==substrs[ j].substr(0, j-i))  //寻找以a开头的子串（对于本题的输入而言）下面依次为b开头的子串，一直到c开头的子串
+
+     {
+
+        ++count;
+
+       for(int k=j+(j-i);k<len;k+=j-i)
+
+        {
+
+         if(substrs[i].substr(0, j-i)==substrs[k].substr(0, j-i)) ++count; //如果有连续一个子串出现就继续遍历vector的下一个子串中的和现在出现相同子串的地方的下一个或几个字符
+
+        else   break;
+
+        }
+
+   if(count>maxcount)  //maxcount  记录所有遍历中的最大连续子串出现的次数
+
+   {
+
+     maxcount=count;
+
+      substr=substrs[i].substr(0, j-i);
+
+   }
+
+       }
+
+}
+
+}
+
+return make_pair(maxcount ,substr);   //把maxcount 和 找到的子串做成pair<>返回
+
+}
+
+int main()
+{
+pair<int,string> result;
+string str="abcbcbcabc";
+result=fun(str);
+cout<<result.first<<" "<<result.second<<endl; //输出为：2 ab
+return 0;
+}
+ 总体思路是：首先把给出的字符串按每次减少一个头部字符的方式存入vector中，然后开始在vector[0]中遍历以a开头的子串连续出现的次数。比较的方式为那vector[0]以a开头的一个字符和vector[1]内的比较 如果有 继续 没有 比较以ab开头的子串 。依次类推。下面是vector[1]中以b开头的的 步骤如上。
